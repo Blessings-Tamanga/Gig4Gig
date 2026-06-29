@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gig4Gig — Malawi's Digital Work Infrastructure</title>
+<meta name="description" content="Gig4Gig connects verified Malawian professionals with businesses, NGOs and individuals — with mobile money payments, identity verification, AI tools and escrow protection built in.">
+<meta property="og:title" content="Gig4Gig — Malawi's Digital Work Infrastructure">
+<meta property="og:description" content="The operating system for Malawi's gig economy. Mobile money payments, NRB identity verification, AI onboarding and escrow — built for Malawi.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_MW">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:    #0B2540;
+  --navy2:   #0D2E4E;
+  --teal:    #00C2A0;
+  --teal2:   #00A087;
+  --amber:   #F5A623;
+  --sun1:    #F7C048;
+  --sun2:    #F08C1A;
+  --offwhite:#F6F8FB;
+  --white:   #FFFFFF;
+  --char:    #1A2B3C;
+  --mid:     #3D5470;
+  --muted:   #6B7C8F;
+  --rule:    #D4DCE8;
+  --teal-faint: rgba(0,194,160,0.1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--char);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ───────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(11,37,64,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 0 5%;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.35rem; font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo .four { color: var(--teal); }
+
+.nav-links {
+  display: flex; gap: 1.8rem; align-items: center;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.875rem; font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  background: var(--teal) !important;
+  color: var(--navy) !important;
+  padding: 0.45rem 1.1rem !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--teal2) !important; }
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 6px;
+}
+.nav-hamburger span {
+  width: 22px; height: 2px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 2px;
+  display: block;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed; top: 64px; left: 0; right: 0;
+  background: rgba(11,37,64,0.98);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 1.2rem 5%;
+  z-index: 199;
+  flex-direction: column; gap: 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 1rem; font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: color 0.2s;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--teal); }
+
+/* ── HERO ──────────────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 100px 5% 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(0,194,160,0.18) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.hero-sun {
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(420px, 42vw);
+  aspect-ratio: 1;
+  pointer-events: none;
+  opacity: 0.13;
+}
+.hero-sun svg { width: 100%; height: 100%; }
+
+.hero-inner {
+  position: relative;
+  max-width: 1100px; margin: 0 auto; width: 100%;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(0,194,160,0.1);
+  border: 1px solid rgba(0,194,160,0.22);
+  color: var(--teal);
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 0.32rem 0.85rem;
+  border-radius: 100px;
+  margin-bottom: 1.6rem;
+}
+.hero-eyebrow::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--teal); border-radius: 50%;
+  animation: blink 2.4s ease-in-out infinite;
+}
+@keyframes blink {
+  0%,100% { opacity: 1; } 50% { opacity: 0.25; }
+}
+
+.hero-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.5rem, 5.2vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.09;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  max-width: 680px;
+  margin-bottom: 0.7rem;
+}
+.hero-headline .t { color: var(--teal); }
+.hero-headline .a { color: var(--amber); }
+
+.hero-nameplate {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.88rem; font-weight: 500;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.4rem;
+}
+.hero-nameplate span { color: rgba(255,255,255,0.55); }
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.65);
+  max-width: 520px;
+  line-height: 1.75;
+  margin-bottom: 2.2rem;
+}
+
+.hero-actions {
+  display: flex; gap: 0.9rem; flex-wrap: wrap;
+  margin-bottom: 3.6rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--teal);
+  color: var(--navy);
+  padding: 0.82rem 1.9rem;
+  border-radius: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700; font-size: 0.93rem;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+  box-shadow: 0 4px 20px rgba(0,194,160,0.3);
+  border: none; cursor: pointer;
+}
+.btn-primary:hover {
+  background: var(--teal2);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 28px rgba(0,194,160,0.4);
+}
+
+.btn-ghost {
+  display: inline-block;
+  color: rgba(255,255,255,0.7);
+  padding: 0.82rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.14);
+  font-weight: 500; font-size: 0.93rem;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.38); color: var(--white); }
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 860px;
+}
+.stat-item {
+  background: rgba(255,255,255,0.03);
+  padding: 1.1rem 1.3rem;
+}
+.stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.55rem; font-weight: 500;
+  color: var(--teal);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.stat-label {
+  font-size: 0.76rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.4;
+}
+.stat-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem; font-weight: 500;
+  color: rgba(245,166,35,0.7);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+/* ── SECTIONS ──────────────────────────────────────────────────── */
+section { padding: 96px 5%; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+
+.eyebrow {
+  font-size: 0.76rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal2);
+  margin-bottom: 0.8rem;
+}
+
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.85rem, 3.4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.14;
+  color: var(--navy);
+  margin-bottom: 0.9rem;
+}
+
+.section-sub {
+  font-size: 1.03rem;
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.72;
+  margin-bottom: 3rem;
+}
+
+/* ── PROBLEM ───────────────────────────────────────────────────── */
+#problem { background: var(--offwhite); }
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.problem-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 1.8rem;
+  border-top: 3px solid var(--rule);
+  transition: border-top-color 0.2s;
+}
+.problem-card:hover { border-top-color: var(--teal); }
+
+.problem-icon { font-size: 1.5rem; margin-bottom: 0.9rem; display: block; }
+
+.problem-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem; font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.55rem;
+}
+.problem-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+/* ── SOLUTION ──────────────────────────────────────────────────── */
+#solution { background: var(--white); }
+
+.infra-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+.infra-card {
+  background: var(--offwhite);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 1.7rem;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+}
+.infra-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  border-color: var(--teal);
+}
+.infra-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem; color: var(--teal);
+  letter-spacing: 0.04em; margin-bottom: 0.75rem; opacity: 0.85;
+}
+.infra-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.97rem; font-weight: 600;
+  color: var(--navy); margin-bottom: 0.55rem;
+}
+.infra-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.6; }
+.infra-tag {
+  display: inline-block; margin-top: 0.9rem;
+  font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--teal2);
+  background: var(--teal-faint);
+  padding: 0.22rem 0.6rem; border-radius: 100px;
+}
+
+/* ── HOW IT WORKS ──────────────────────────────────────────────── */
+#how { background: var(--navy); }
+#how .section-title { color: var(--white); }
+#how .section-sub   { color: rgba(255,255,255,0.48); }
+#how .eyebrow       { color: var(--teal); }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.step {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 1.6rem 1.3rem;
+  position: relative;
+}
+.step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -0.8rem; top: 50%;
+  transform: translateY(-50%);
+  color: var(--teal);
+  font-size: 1rem;
+  z-index: 1;
+}
+
+.step-num {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(0,194,160,0.12);
+  border: 1.5px solid rgba(0,194,160,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem; font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+.step:last-child .step-num {
+  background: rgba(245,166,35,0.1);
+  border-color: rgba(245,166,35,0.3);
+  color: var(--amber);
+}
+
+.step h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.93rem; font-weight: 600;
+  color: var(--white); margin-bottom: 0.45rem;
+}
+.step p { font-size: 0.83rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+/* ── IMPACT ────────────────────────────────────────────────────── */
+#impact { background: var(--offwhite); }
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+.impact-cell {
+  background: var(--white);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+.impact-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.3rem; font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  line-height: 1; margin-bottom: 0.4rem;
+}
+.impact-value span { color: var(--teal); }
+.impact-label { font-size: 0.83rem; color: var(--muted); line-height: 1.5; max-width: 130px; margin: 0 auto; }
+
+.sdg-strip { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.sdg-badge {
+  display: flex; align-items: center; gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px; font-size: 0.82rem; font-weight: 500;
+  border: 1px solid var(--rule); background: var(--white); color: var(--char);
+}
+.sdg-badge .sdg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── TEAM — FLIP CARDS ─────────────────────────────────────────── */
+#team { background: var(--white); }
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+
+/* Outer card — holds perspective */
+.team-card {
+  perspective: 1200px;
+  height: 420px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Inner rotating container */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* Flip on hover */
+.team-card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Both faces — shared positioning */
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* ── FRONT — Full photo ── */
+.card-front {
+  background: var(--navy);
+  border: 1px solid var(--rule);
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.95);
+  transition: filter 0.4s, transform 0.7s cubic-bezier(0.4,0.2,0.2,1);
+}
+
+/* Subtle gradient overlay at bottom for name hint */
+.card-front::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(11,37,64,0.85) 0%, rgba(11,37,64,0.4) 40%, transparent 100%);
+  pointer-events: none;
+}
+
+.card-front .front-label {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 1.4rem;
+  right: 1.4rem;
+  z-index: 2;
+  color: var(--white);
+  pointer-events: none;
+}
+.card-front .front-label h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.15rem;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.card-front .front-label span {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--teal);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+/* Flip hint icon */
+.card-front .flip-hint {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(11,37,64,0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  transition: background 0.2s, color 0.2s;
+}
+.team-card:hover .flip-hint {
+  background: var(--teal);
+  color: var(--navy);
+}
+
+/* ── BACK — Bio content ── */
+.card-back {
+  background: var(--navy);
+  border: 1px solid rgba(0,194,160,0.25);
+  transform: rotateY(180deg);
+  padding: 2rem 1.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 12px 40px rgba(11,37,64,0.15);
+}
+
+/* Decorative top accent line */
+.card-back::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--amber));
+}
+
+.card-back .back-role-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--teal);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+  opacity: 0.85;
+}
+.card-back .back-role-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+.card-back h4 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.015em;
+  margin-bottom: 0.25rem;
+  line-height: 1.25;
+}
+
+.card-back .role {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 1.2rem;
+  line-height: 1.55;
+}
+
+.card-back .back-divider {
+  width: 32px;
+  height: 2px;
+  background: var(--teal);
+  border-radius: 2px;
+  margin-bottom: 1.1rem;
+  opacity: 0.6;
+}
+
+.card-back p {
+  font-size: 0.84rem;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.7;
+}
+
+/* ── INVESTOR ──────────────────────────────────────────────────── */
+#investors {
+  background: var(--white);
+  border-top: 1px solid var(--rule);
+}
+
+.inv-card {
+  background: var(--navy);
+  border-radius: 16px;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.inv-card h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.75rem; font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.025em; line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+.inv-card h2 span { color: var(--teal); }
+.inv-card p {
+  font-size: 0.93rem; color: rgba(255,255,255,0.52);
+  line-height: 1.72; margin-bottom: 1.4rem;
+}
+.inv-metrics {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px; overflow: hidden;
+}
+.inv-metric { background: rgba(255,255,255,0.04); padding: 1.15rem; }
+.inv-metric-val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.45rem; font-weight: 700;
+  color: var(--teal); letter-spacing: -0.02em;
+  margin-bottom: 0.22rem;
+}
+.inv-metric-lbl { font-size: 0.78rem; color: rgba(255,255,255,0.38); line-height: 1.4; }
+
+/* ── WAITLIST / CONTACT ────────────────────────────────────────── */
+#contact {
+  background: var(--navy);
+  padding: 80px 5%;
+}
+.contact-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+}
+.contact-left h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 700; color: var(--white);
+  letter-spacing: -0.025em; line-height: 1.2;
+  margin-bottom: 0.8rem;
+}
+.contact-left p { font-size: 0.95rem; color: rgba(255,255,255,0.48); line-height: 1.72; }
+
+.waitlist-form { display: flex; flex-direction: column; gap: 0.8rem; }
+.waitlist-form label {
+  font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 0.2rem;
+}
+.form-row { display: flex; flex-direction: column; gap: 0.3rem; }
+.waitlist-form input, .waitlist-form select {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem; color: var(--white);
+  outline: none; transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.waitlist-form input::placeholder { color: rgba(255,255,255,0.28); }
+.waitlist-form input:focus, .waitlist-form select:focus {
+  border-color: var(--teal);
+}
+.waitlist-form select { color: rgba(255,255,255,0.65); }
+.waitlist-form select option { background: var(--navy); color: var(--white); }
+.form-submit {
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 0.85rem;
+  background: var(--teal);
+  color: var(--navy);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700; font-size: 0.95rem;
+  border: none; border-radius: 8px; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.form-submit:hover { background: var(--teal2); transform: translateY(-1px); }
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+  background: rgba(0,194,160,0.08);
+  border: 1px solid rgba(0,194,160,0.2);
+  border-radius: 12px;
+}
+.form-success h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem; font-weight: 700;
+  color: var(--teal); margin-bottom: 0.4rem;
+}
+.form-success p { font-size: 0.875rem; color: rgba(255,255,255,0.55); }
+
+/* ── FOOTER ────────────────────────────────────────────────────── */
+footer {
+  background: var(--navy);
+  padding: 2.4rem 5%;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 2rem; flex-wrap: wrap;
+}
+.footer-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.2rem; font-weight: 700; color: var(--white);
+}
+.footer-logo span { color: var(--teal); }
+.footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.3); margin-top: 0.25rem; }
+.footer-links { display: flex; gap: 1.8rem; }
+.footer-links a {
+  font-size: 0.85rem; color: rgba(255,255,255,0.4);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--teal); }
+.footer-copy {
+  font-size: 0.78rem; color: rgba(255,255,255,0.2);
+  width: 100%; margin-top: 1.8rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+}
+
+/* ── REVEAL ANIMATION ──────────────────────────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ────────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .hero-sun { opacity: 0.07; width: min(280px, 50vw); }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .problem-grid { grid-template-columns: 1fr 1fr; }
+  .infra-grid { grid-template-columns: 1fr 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .step:not(:last-child)::after { display: none; }
+  .impact-grid { grid-template-columns: 1fr 1fr; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .team-card { height: 380px; }
+  .inv-card { grid-template-columns: 1fr; gap: 2rem; }
+  .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+@media (max-width: 600px) {
+  section { padding: 72px 5%; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .infra-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .impact-grid { grid-template-columns: 1fr 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .team-card { height: 400px; }
+  .inv-metrics { grid-template-columns: 1fr; }
+  .hero-sun { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .card-inner { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav aria-label="Main navigation">
+  <a href="#hero" class="nav-logo">Gig<span class="four">4</span>Gig</a>
+  <ul class="nav-links" role="list">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#solution">Platform</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#investors">Investors</a></li>
+    <li><a href="#contact" class="nav-cta">Join Waitlist</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" id="hamburger">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+  <a href="#problem" onclick="closeMobile()">The Problem</a>
+  <a href="#solution" onclick="closeMobile()">The Platform</a>
+  <a href="#team" onclick="closeMobile()">Team</a>
+  <a href="#impact" onclick="closeMobile()">Impact</a>
+  <a href="#investors" onclick="closeMobile()">Investors</a>
+  <a href="#contact" onclick="closeMobile()">Join Waitlist</a>
+</div>
+
+<!-- HERO -->
+<section id="hero" aria-label="Hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="hero-sun" aria-hidden="true">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="sg" cx="50%" cy="50%" r="50%">
+          <stop offset="30%" stop-color="#F7C048"/>
+          <stop offset="100%" stop-color="#F08C1A" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <g stroke="#F7C048" stroke-width="2.5" stroke-linecap="round" opacity="0.9">
+        <line x1="200" y1="200" x2="200" y2="40"/>
+        <line x1="200" y1="200" x2="232" y2="41"/>
+        <line x1="200" y1="200" x2="263" y2="47"/>
+        <line x1="200" y1="200" x2="291" y2="59"/>
+        <line x1="200" y1="200" x2="316" y2="76"/>
+        <line x1="200" y1="200" x2="337" y2="97"/>
+        <line x1="200" y1="200" x2="353" y2="122"/>
+        <line x1="200" y1="200" x2="363" y2="150"/>
+        <line x1="200" y1="200" x2="368" y2="180"/>
+        <line x1="200" y1="200" x2="366" y2="210"/>
+        <line x1="200" y1="200" x2="359" y2="240"/>
+        <line x1="200" y1="200" x2="346" y2="267"/>
+        <line x1="200" y1="200" x2="327" y2="291"/>
+        <line x1="200" y1="200" x2="305" y2="311"/>
+        <line x1="200" y1="200" x2="278" y2="327"/>
+        <line x1="200" y1="200" x2="249" y2="337"/>
+        <line x1="200" y1="200" x2="220" y2="342"/>
+        <line x1="200" y1="200" x2="180" y2="342"/>
+        <line x1="200" y1="200" x2="151" y2="337"/>
+        <line x1="200" y1="200" x2="122" y2="327"/>
+        <line x1="200" y1="200" x2="95" y2="311"/>
+        <line x1="200" y1="200" x2="73" y2="291"/>
+        <line x1="200" y1="200" x2="54" y2="267"/>
+        <line x1="200" y1="200" x2="41" y2="240"/>
+        <line x1="200" y1="200" x2="34" y2="210"/>
+        <line x1="200" y1="200" x2="32" y2="180"/>
+        <line x1="200" y1="200" x2="37" y2="150"/>
+        <line x1="200" y1="200" x2="47" y2="122"/>
+        <line x1="200" y1="200" x2="63" y2="97"/>
+        <line x1="200" y1="200" x2="84" y2="76"/>
+        <line x1="200" y1="200" x2="109" y2="59"/>
+      </g>
+      <circle cx="200" cy="200" r="72" fill="url(#sg)" opacity="0.9"/>
+      <circle cx="200" cy="200" r="52" fill="#F7C048" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Malawi's Digital Work Infrastructure</div>
+
+    <h1 class="hero-headline">
+      The <span class="t">operating system</span>
+      for Malawi's
+      <span class="a">gig economy</span>
+    </h1>
+
+    <p class="hero-nameplate">
+      <span>Gig4Gig</span> — every hire creates an opportunity. Every opportunity builds a career.
+    </p>
+
+    <p class="hero-sub">
+      Thousands of Malawians have the skills. The infrastructure to earn from them — verified identities, local payments, trusted escrow — has never existed. Until now.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Join the Waitlist</a>
+      <a href="#solution" class="btn-ghost">See How It Works →</a>
+    </div>
+
+    <div class="stats-bar" aria-label="Platform targets">
+      <div class="stat-item">
+        <div class="stat-tag">Year 1 target</div>
+        <div class="stat-value">2,000</div>
+        <div class="stat-label">Verified freelancers onboarded</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-tag">Year 1 target</div>
+        <div class="stat-value">500</div>
+        <div class="stat-label">Businesses and NGOs served</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-tag">Year 3 target</div>
+        <div class="stat-value">MK 2B</div>
+        <div class="stat-label">In transactions facilitated</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-tag">Commitment</div>
+        <div class="stat-value">≥50%</div>
+        <div class="stat-label">Women among service providers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="section-inner">
+    <p class="eyebrow">The Problem</p>
+    <h2 class="section-title">Malawi has the talent.<br>It's missing the infrastructure.</h2>
+    <p class="section-sub">Global freelance platforms exist. Malawian participation is near zero — not because of a skills gap, but because the infrastructure was never built for this market.</p>
+
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <span class="problem-icon">🔒</span>
+        <h3>No trusted digital identity layer</h3>
+        <p>Online transactions between strangers require verified identities. No platform has connected Malawi's National ID system (NRB/NRIS) to digital work — until now.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="problem-icon">💱</span>
+        <h3>USD-only payment rails lock people out</h3>
+        <p>Fiverr and Upwork require USD accounts. Most Malawians don't have them. Airtel Money and TNM Mpamba are the real financial infrastructure here — and they've been ignored by every global platform.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="problem-icon">📋</span>
+        <h3>No path for first-time freelancers</h3>
+        <p>Graduates with marketable skills have no portfolio, no credibility and no guidance on where to start. Existing platforms favour the already-experienced and shut out everyone else.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="problem-icon">📱</span>
+        <h3>Businesses hire through WhatsApp groups</h3>
+        <p>SMEs source designers, developers and consultants through personal referrals and Facebook posts. It is slow, unverifiable, and inefficient — a broken market waiting to be fixed.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="problem-icon">⚖️</span>
+        <h3>No payment protection for project work</h3>
+        <p>Freelancers get paid late or not at all. Clients receive incomplete work and have no recourse. Without escrow, neither side trusts the other enough to transact online.</p>
+      </div>
+      <div class="problem-card reveal">
+        <span class="problem-icon">🌍</span>
+        <h3>Informal work is the only option</h3>
+        <p>Skilled professionals are stuck in untracked, underpaid maganyu arrangements. The digital economy exists in Malawi — it just has no infrastructure to run on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="section-inner">
+    <p class="eyebrow">The Platform</p>
+    <h2 class="section-title">Six infrastructure layers.<br>One platform.</h2>
+    <p class="section-sub">Gig4Gig is not another marketplace. It is the foundational layer that makes digital work possible, trusted and accessible for any Malawian with a skill.</p>
+
+    <div class="infra-grid">
+      <div class="infra-card reveal">
+        <div class="infra-num">01 / TRUST</div>
+        <h3>Digital Identity and Trust</h3>
+        <p>National ID verification via NRB/NRIS, behavioural trust scoring, escrow payment protection and reputation history. Trust becomes measurable, not assumed.</p>
+        <span class="infra-tag">NRB / NRIS Verified</span>
+      </div>
+      <div class="infra-card reveal">
+        <div class="infra-num">02 / PAYMENTS</div>
+        <h3>Local Payment Infrastructure</h3>
+        <p>Airtel Money, TNM Mpamba and bank transfers via Paychangu. All pricing in MWK. Milestone-based escrow release. No USD account required — ever.</p>
+        <span class="infra-tag">Airtel · TNM · Banks</span>
+      </div>
+      <div class="infra-card reveal">
+        <div class="infra-num">03 / ONBOARDING</div>
+        <h3>Skill-to-Income Engine</h3>
+        <p>AI-assisted profile creation, ready-made service templates, smart pricing recommendations and invoice automation. From "I have a skill" to first income — fast.</p>
+        <span class="infra-tag">AI-Powered</span>
+      </div>
+      <div class="infra-card reveal">
+        <div class="infra-num">04 / ENTRY</div>
+        <h3>Beginner Economy Layer</h3>
+        <p>Beginner-only categories, fixed-price micro-tasks and a trust progression from Newcomer to Verified Pro. A structured entry point that global platforms deliberately removed.</p>
+        <span class="infra-tag">First-Timer Friendly</span>
+      </div>
+      <div class="infra-card reveal">
+        <div class="infra-num">05 / MARKET</div>
+        <h3>Digital Marketplace</h3>
+        <p>Search and hire by skill, location, rating and price. Post projects, compare portfolios, track milestones and leave verified reviews. The commercial engine of the platform.</p>
+        <span class="infra-tag">Lilongwe · Blantyre · National</span>
+      </div>
+      <div class="infra-card reveal">
+        <div class="infra-num">06 / AI TOOLS</div>
+        <h3>AI Business Assistant</h3>
+        <p>Draft proposals, generate contracts, optimise profiles and get client communication support — all inside the platform. Professional-quality output for first-time entrepreneurs.</p>
+        <span class="infra-tag">Built-In Assistant</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-inner">
+    <p class="eyebrow">How It Works</p>
+    <h2 class="section-title" style="color:var(--white)">From signup to paid — in four steps</h2>
+    <p class="section-sub">Every friction point that stops Malawians from earning online has been removed by design.</p>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h4>Verify your identity</h4>
+        <p>Link your National ID via NRB/NRIS. One-time verification that unlocks platform trust permanently.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h4>Build your profile with AI</h4>
+        <p>Our AI assistant helps you create a professional service listing, set pricing and write your first proposal — in minutes.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h4>Get hired. Deliver. Earn.</h4>
+        <p>Clients hire you directly or respond to bids. Funds go into escrow. You deliver. Milestone met — funds released.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <h4>Get paid in MWK</h4>
+        <p>Receive payment to Airtel Money or TNM Mpamba directly. No bank account needed. No USD. No waiting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM — FLIP CARDS -->
+<section id="team">
+  <div class="section-inner">
+    <p class="eyebrow">The Team</p>
+    <h2 class="section-title">Women-led. Malawi-built.<br>Operator-focused.</h2>
+    <p class="section-sub">The founding team combines technology, product and business development with deep roots in Malawi's entrepreneurial ecosystem.</p>
+
+    <div class="team-grid">
+
+      <!-- CEO -->
+      <div class="team-card reveal">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="Media/professional_debra.png" alt="Dorothy Debborah Tamanga">
+            <div class="flip-hint" aria-hidden="true">↻</div>
+            <div class="front-label">
+              <h4>Dorothy Debborah Tamanga</h4>
+              <span>Chief Executive Officer</span>
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="back-role-tag">CEO · Founder</div>
+            <h4>Dorothy Debborah Tamanga</h4>
+            <p class="role">Strategy, Partnerships & Business Growth</p>
+            <div class="back-divider"></div>
+            <p>Leads the strategic vision and growth of Gig4Gig, overseeing partnerships, fundraising, investor relations, and business development. Passionate about advancing digital entrepreneurship and expanding economic opportunities through technology-led innovation.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTO -->
+      <div class="team-card reveal">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="Media/Me.jpg" alt="Emmanuel Phiri">
+            <div class="flip-hint" aria-hidden="true">↻</div>
+            <div class="front-label">
+              <h4>Emmanuel Phiri</h4>
+              <span>Chief Technology Officer</span>
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="back-role-tag">CTO · Co-Founder</div>
+            <h4>Emmanuel Phiri</h4>
+            <p class="role">Technology Strategy, Platform Architecture & Engineering</p>
+            <div class="back-divider"></div>
+            <p>Leads the company's technology strategy and oversees the design, development and scalability of the Gig4Gig platform. Responsible for software architecture, cloud infrastructure, system security, API integrations, and ensuring reliable, high-quality technical delivery.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- COO -->
+      <div class="team-card reveal">
+        <div class="card-inner">
+          <div class="card-front">
+            <img src="Media/Image Jun 27, 2026, 12_05_12 PM.png" alt="Blessings Tamanga">
+            <div class="flip-hint" aria-hidden="true">↻</div>
+            <div class="front-label">
+              <h4>Blessings Tamanga</h4>
+              <span>Chief Operating Officer</span>
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="back-role-tag">COO · Lead Developer</div>
+            <h4>Blessings Tamanga</h4>
+            <p class="role">Operations, Software Development & Product Delivery</p>
+            <div class="back-divider"></div>
+            <p>Oversees operational execution while contributing to core platform development. Coordinates engineering sprints, manages development workflows, allocates technical tasks, and ensures the successful delivery of product features in alignment with business goals.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="section-inner">
+    <p class="eyebrow">Projected Impact — Years 1 to 3</p>
+    <h2 class="section-title">Built for measurable,<br>lasting economic change</h2>
+    <p class="section-sub">Three-year projections based on mobile money penetration data, early user conversations and comparable emerging-market platform growth trajectories.</p>
+
+    <div class="impact-grid">
+      <div class="impact-cell reveal">
+        <div class="impact-value">8,000<span>+</span></div>
+        <div class="impact-label">Verified professionals by Year 3</div>
+      </div>
+      <div class="impact-cell reveal">
+        <div class="impact-value">5,000<span>+</span></div>
+        <div class="impact-label">Businesses and NGOs served</div>
+      </div>
+      <div class="impact-cell reveal">
+        <div class="impact-value">MK 2<span>B</span></div>
+        <div class="impact-label">In transaction value (Year 3)</div>
+      </div>
+      <div class="impact-cell reveal">
+        <div class="impact-value"><span>≥</span>50<span>%</span></div>
+        <div class="impact-label">Women among verified providers</div>
+      </div>
+    </div>
+
+    <p class="eyebrow" style="margin-bottom:1rem">Sustainable Development Goals</p>
+    <div class="sdg-strip">
+      <div class="sdg-badge"><div class="sdg-dot" style="background:#FF3A21"></div>SDG 5 — Gender Equality</div>
+      <div class="sdg-badge"><div class="sdg-dot" style="background:#A21942"></div>SDG 8 — Decent Work and Economic Growth</div>
+      <div class="sdg-badge"><div class="sdg-dot" style="background:#FD6925"></div>SDG 9 — Industry, Innovation and Infrastructure</div>
+      <div class="sdg-badge"><div class="sdg-dot" style="background:#DD1367"></div>SDG 10 — Reduced Inequalities</div>
+      <div class="sdg-badge"><div class="sdg-dot" style="background:#19486A"></div>SDG 17 — Partnerships for the Goals</div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTORS -->
+<section id="investors">
+  <div class="section-inner">
+    <p class="eyebrow" style="margin-bottom:2rem">Investment and Partnership</p>
+    <div class="inv-card">
+      <div>
+        <h2>Seeking <span>strategic partners</span> to build Malawi's digital workforce</h2>
+        <p>Gig4Gig is a pre-revenue, MVP-stage venture seeking grant and investment partnerships. We are currently in the Growth Accelerator Cohort 13 application process and are open to conversations with angel investors and development finance organisations aligned with our SDG impact mandate.</p>
+        <p>If you are interested in Malawi's digital economy and want to back a team building the infrastructure layer — not just another app — we want to hear from you.</p>
+        <a href="#contact" class="btn-primary">Get in Touch</a>
+      </div>
+      <div class="inv-metrics">
+        <div class="inv-metric reveal">
+          <div class="inv-metric-val">USD 39k</div>
+          <div class="inv-metric-lbl">Total 12-month project cost (MVP to national pilot)</div>
+        </div>
+        <div class="inv-metric reveal">
+          <div class="inv-metric-val">10%</div>
+          <div class="inv-metric-lbl">Platform commission on every completed transaction</div>
+        </div>
+        <div class="inv-metric reveal">
+          <div class="inv-metric-val">Month 5</div>
+          <div class="inv-metric-lbl">Revenue begins from first pilot transactions</div>
+        </div>
+        <div class="inv-metric reveal">
+          <div class="inv-metric-val">Year 3</div>
+          <div class="inv-metric-lbl">Projected net profitability on MK 250M revenue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <p class="eyebrow" style="color:var(--teal)">Get Involved</p>
+      <h2>Be first on Gig4Gig</h2>
+      <p>Whether you are a freelancer ready to earn, a business looking for verified talent, or an investor interested in Malawi's digital economy — join the waitlist and we will be in touch before public launch.</p>
+    </div>
+    <div>
+      <form class="waitlist-form" id="waitlist-form" novalidate>
+        <div class="form-row">
+          <label for="wl-name">Full name</label>
+          <input type="text" id="wl-name" name="name" placeholder="Chisomo Banda" required autocomplete="name">
+        </div>
+        <div class="form-row">
+          <label for="wl-email">Email address</label>
+          <input type="email" id="wl-email" name="email" placeholder="chisomo@example.com" required autocomplete="email">
+        </div>
+        <div class="form-row">
+          <label for="wl-type">I am joining as a</label>
+          <select id="wl-type" name="type" required>
+            <option value="" disabled selected>Select one</option>
+            <option value="freelancer">Freelancer / independent professional</option>
+            <option value="business">Business or NGO</option>
+            <option value="investor">Investor or funding partner</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit">Join the Waitlist →</button>
+      </form>
+      <div class="form-success" id="form-success">
+        <h3>You're on the list.</h3>
+        <p>We'll reach out before public launch. Zikomo — thank you for your interest in Gig4Gig.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Gig<span>4</span>Gig</div>
+      <div class="footer-tagline">Malawi's Digital Work Infrastructure Platform</div>
+    </div>
+    <div class="footer-links">
+      <a href="#problem">Problem</a>
+      <a href="#solution">Platform</a>
+      <a href="#team">Team</a>
+      <a href="#impact">Impact</a>
+      <a href="#investors">Investors</a>
+      <a href="#contact">Waitlist</a>
+    </div>
+    <div class="footer-copy">
+      © 2026 Gig4Gig · Lilongwe, Malawi · Transforming Skills into Sustainable Income
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── MOBILE MENU ────────────────────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', open);
+});
+
+function closeMobile() {
+  mobileMenu.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+}
+
+// ── SCROLL REVEAL ──────────────────────────────────────────────────
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = ((i % 3) * 0.08) + 's';
+  revealObserver.observe(el);
+});
+
+// ── WAITLIST FORM ──────────────────────────────────────────────────
+document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const name  = document.getElementById('wl-name').value.trim();
+  const email = document.getElementById('wl-email').value.trim();
+  const type  = document.getElementById('wl-type').value;
+
+  if (!name || !email || !type) {
+    const firstEmpty = !name
+      ? document.getElementById('wl-name')
+      : !email
+        ? document.getElementById('wl-email')
+        : document.getElementById('wl-type');
+    firstEmpty.focus();
+    firstEmpty.style.borderColor = '#e05050';
+    setTimeout(() => { firstEmpty.style.borderColor = ''; }, 2000);
+    return;
+  }
+
+  const subject = encodeURIComponent('Gig4Gig Waitlist: ' + type);
+  const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nType: ' + type);
+  window.location.href = 'mailto:founders@gig4gig.mw?subject=' + subject + '&body=' + body;
+
+  this.style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+});
+</script>
+
+</body>
+</html>
